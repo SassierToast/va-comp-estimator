@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Jumbotron from './components/Jumbotron'
+import Jumbotron from './components/Jumbotron';
+import Inputs from './components/Inputs';
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,6 +9,8 @@ class App extends Component {
     return (
       <div className="container">
         <Jumbotron />
+        <Inputs />
+
         
       </div>
     );

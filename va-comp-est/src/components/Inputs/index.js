@@ -57,8 +57,48 @@ class Inputs extends Component {
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
                     <label class="form-check-label" for="inlineRadio3">Two</label>
                   </div>
-
                 </div>
+              </div>
+              {/* Scroll selectors for children */}
+              <div className="row inputs-section">
+                <div className="col-md-6 text-center">
+                  <p>Children Under 18</p>
+                  <form>
+                    <div className="col-auto my-1">
+                      <label className="mr-sm-2 sr-only" for="depChildren18">Dependent Children Under 18</label>
+                      <select className="custom-select mr-sm-2" id="depChildren18">
+                        <option selected value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                      </select>
+                    </div>
+                  </form>
+                </div>
+                <div className="col-md-6 text-center">
+                  <p>Children Between 18 and 23 attending school</p>
+                  <form>
+                    <div className="col-auto my-1">
+                      <label className="mr-sm-2 sr-only" for="depChildrenSchool">Dependent Children Under 18</label>
+                      <select className="custom-select mr-sm-2" id="depChildrenSchool">
+                        <option selected value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                      </select>
+                    </div>
+                  </form>
+                </div>
+
+
               </div>
             </div>
           </div>

@@ -25,7 +25,7 @@ class Inputs extends Component {
                 </div>
               </div>
               {/* Two toggle switches */}
-              <div className="row">
+              <div className="row inputs-section">
                 <div className="col-md-6 text-center">
                   <p>Single/Married</p>
                   <div className="custom-control custom-switch">
@@ -39,6 +39,25 @@ class Inputs extends Component {
                     <input type="checkbox" className="custom-control-input" id="spAA" />
                     <label className="custom-control-label" for="spAA"></label>
                   </div>
+                </div>
+              </div>
+              {/* Radio buttons for dependent parents */}
+              <div className="row inputs-section">
+                <div className="col-md-12 text-center">
+                  <p>Dependent Parents</p>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                    <label class="form-check-label" for="inlineRadio1">None</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                    <label class="form-check-label" for="inlineRadio2">One</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
+                    <label class="form-check-label" for="inlineRadio3">Two</label>
+                  </div>
+
                 </div>
               </div>
             </div>

@@ -9,6 +9,7 @@ class Inputs extends Component {
         <div className="row">
           <div className="col-md-6 offset-md-3 input-box">
             <div className="container">
+              {/* Effective Date Selector */}
               <div className="row">
                 <div className="col-md-12">
                   <div className="form-group">
@@ -20,6 +21,23 @@ class Inputs extends Component {
                       <option value="20141201">12/01/2015</option>
                       <option value="20141201">12/01/2014</option>
                     </select>
+                  </div>
+                </div>
+              </div>
+              {/* Two toggle switches */}
+              <div className="row">
+                <div className="col-md-6 text-center">
+                  <p>Single/Married</p>
+                  <div className="custom-control custom-switch">
+                    <input type="checkbox" className="custom-control-input" id="maritalStatus" />
+                    <label className="custom-control-label" for="maritalStatus"></label>
+                  </div>
+                </div>
+                <div className="col-md-6 text-center">
+                  <p>Spouse Aid and Attendance</p>
+                  <div className="custom-control custom-switch">
+                    <input type="checkbox" className="custom-control-input" id="spAA" />
+                    <label className="custom-control-label" for="spAA"></label>
                   </div>
                 </div>
               </div>

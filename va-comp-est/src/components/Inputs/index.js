@@ -45,17 +45,17 @@ class Inputs extends Component {
               <div className="row inputs-section">
                 <div className="col-md-12 text-center">
                   <p>Dependent Parents</p>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                    <label class="form-check-label" for="inlineRadio1">None</label>
+                  <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                    <label className="form-check-label" for="inlineRadio1">None</label>
                   </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                    <label class="form-check-label" for="inlineRadio2">One</label>
+                  <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                    <label className="form-check-label" for="inlineRadio2">One</label>
                   </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
-                    <label class="form-check-label" for="inlineRadio3">Two</label>
+                  <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
+                    <label className="form-check-label" for="inlineRadio3">Two</label>
                   </div>
                 </div>
               </div>
@@ -97,8 +97,13 @@ class Inputs extends Component {
                     </div>
                   </form>
                 </div>
-
-
+              </div>
+              {/* Slider for combined evaluation for compensation percentage */}
+              <div className="row inputs-section">
+                <div className="col-md-12">
+                  <label for="compRating">Combined Evaluation for Compensation</label>
+                  <input type="range" className="custom-range" min="0" max="100" step="10" id="compRating"></input>
+                </div>
               </div>
             </div>
           </div>

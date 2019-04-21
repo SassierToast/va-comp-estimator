@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Results from '../Results'
 import './index.css';
 
 // need to make this a stateful component so responses get saved.
@@ -7,7 +8,7 @@ class Inputs extends Component {
     return (
       <div className="wrapper">
         <div className="row">
-          <div className="col-md-6 offset-md-3 input-box">
+          <div className="col-md-6 offset-md-3  input-box">
             <div className="container">
               {/* Effective Date Selector */}
               <div className="row">
@@ -108,6 +109,7 @@ class Inputs extends Component {
             </div>
           </div>
         </div>
+        <Results></Results>
       </div>
     )
   }

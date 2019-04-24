@@ -1,6 +1,13 @@
+
+
 .output-box {
-  border: solid 2px black;
-  padding-bottom: 25rem;
+  /* width: 500px; */
+  height: 70vh;
   border-radius: 50%;
+  font-size: 25px;
+  color: #fff;
+  line-height: 30vh;
+  text-align: center;
+  background: red;
   margin-top: 5rem;
 }

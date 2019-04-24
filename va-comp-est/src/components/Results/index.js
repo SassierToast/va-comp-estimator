@@ -6,7 +6,10 @@ function Results(props) {
   return (
     <div className="wrapper">
       <div className="row">
-        <div className="col-md-6 offset-md-3 output-box">
+        <div className="col-md-6 offset-md-3 output-box text-center">
+          Estimated Monthly Payment
+          <br />
+          $0.00
         </div>
       </div>
     </div>

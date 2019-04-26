@@ -7,9 +7,9 @@ function Results(props) {
     <div className="wrapper">
       <div className="row">
         <div className="col-md-6 offset-md-3 output-box text-center">
-          Estimated Monthly Payment
+          <h3>Estimated Monthly Payment</h3>
           <br />
-          $0.00
+          <h3>$0.00</h3>
         </div>
       </div>
     </div>

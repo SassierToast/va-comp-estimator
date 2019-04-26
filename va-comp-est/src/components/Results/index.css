@@ -2,12 +2,20 @@
 
 .output-box {
   /* width: 500px; */
-  height: 70vh;
-  border-radius: 50%;
+  /* 
+  
   font-size: 25px;
-  color: #fff;
+  
   line-height: 30vh;
   text-align: center;
+   */
+  margin-top: 5rem; 
   background: red;
+  color: #fff;
+  border-radius: 10%;
+  height: 30rem;
+}
+
+.output-box h3 {
   margin-top: 5rem;
 }

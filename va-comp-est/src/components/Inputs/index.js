@@ -11,7 +11,8 @@ class Inputs extends Component {
     spAidandAttendance: 0,
     depParents: 0,
     depChildren18: 0,
-    depChildrenSchool: 0
+    depChildrenSchool: 0,
+    compEval: 0
   };
 
   componentDidMount() {
@@ -21,7 +22,8 @@ class Inputs extends Component {
       spAidandAttendance: "no",
       depParents: 0,
       depChildren18: 0,
-      depChildrenSchool: 0
+      depChildrenSchool: 0,
+      compEval: 0
     });
   };
 
@@ -63,6 +65,10 @@ class Inputs extends Component {
         () => console.log(this.state)
       )
     } else console.log("something went wrong");
+  }
+
+  tester = (event) => {
+    console.log(event.target.value)
   }
 
 
@@ -180,7 +186,9 @@ class Inputs extends Component {
               <div className="row inputs-section">
                 <div className="col-md-12">
                   <label for="compRating">Combined Evaluation for Compensation</label>
-                  <input type="range" className="custom-range" min="0" max="100" step="10" id="compRating"></input>
+                  <input type="range" className="custom-range" min="0" max="100" step="10" id="compRating"
+                  name="compEval"
+                  onChange={this.handleChange}></input>
                 </div>
               </div>
             </div>

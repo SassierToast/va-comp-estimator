@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Results from '../Results'
 import './index.css';
+import rate from '../../controllers/rate_lookup';
 
 // need to make this a stateful component so responses get saved.
 class Inputs extends Component {
@@ -12,7 +13,8 @@ class Inputs extends Component {
     depParents: 0,
     depChildren18: 0,
     depChildrenSchool: 0,
-    compEval: 0
+    compEval: 0,
+    monthlyRate: 0
   };
 
   componentDidMount() {
@@ -23,14 +25,16 @@ class Inputs extends Component {
       depParents: 0,
       depChildren18: 0,
       depChildrenSchool: 0,
-      compEval: 0
+      compEval: 0,
+      monthlyRate: 0
     });
   };
 
   handleChange = event => {
     this.setState(
       { [event.target.name]: event.target.value },
-      () => console.log(this.state)
+      () => {console.log(this.state);
+            rate.lookUp()}
     );
   };
 
@@ -200,7 +204,8 @@ class Inputs extends Component {
             </div>
           </div>
         </div>
-        <Results></Results>
+        <Results
+          result={this.state.monthlyRate}></Results>
       </div>
     )
   }

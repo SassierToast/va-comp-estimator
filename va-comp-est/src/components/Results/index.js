@@ -9,7 +9,7 @@ function Results(props) {
         <div className="col-md-6 offset-md-3 output-box text-center">
           <h3>Estimated Monthly Payment</h3>
           <br />
-          <h3>$0.00</h3>
+          <h3>${props.result}</h3>
         </div>
       </div>
     </div>

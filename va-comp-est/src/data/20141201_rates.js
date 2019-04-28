@@ -149,3 +149,5 @@ const rates_2014_12_01 = {
     "additional_school_child" : 260.13
   } 
 }
+
+export default rates_2014_12_01;

@@ -6,7 +6,7 @@ import './index.css';
 class Inputs extends Component {
 
   state = {
-    effectiveDate: 0,
+    effectiveDate: "",
     maritalStatus: 0,
     spAidandAttendance: 0,
     depParents: 0
@@ -38,7 +38,9 @@ class Inputs extends Component {
               <div className="row">
                 <div className="col-md-12">
                   <div className="form-group">
-                    <select className="form-control" id="effective-date">
+                    <select className="form-control" id="effective-date"
+                     onChange={this.handleChange}
+                     >
                       <option value="" selected disabled hidden>Effective Date</option>
                       <option value="20181201">12/01/2018</option>
                       <option value="20171201">12/01/2017</option>

@@ -191,6 +191,12 @@ class Inputs extends Component {
                   onChange={this.handleChange}></input>
                 </div>
               </div>
+              {/* Display the value of the slider */}
+              <div className="row inputs-section">
+                <div className="col-md-12">
+                <p>{this.state.compEval}%</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

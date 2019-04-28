@@ -4,6 +4,30 @@ import './index.css';
 
 // need to make this a stateful component so responses get saved.
 class Inputs extends Component {
+
+  state = {
+    effectiveDate: 0,
+    maritalStatus: 0,
+    spAidandAttendance: 0,
+    depParents: 0
+  };
+
+  componentDidMount() {
+    this.setState({
+      effectiveDate: 0,
+      maritalStatus: 1,
+      spAidandAttendance: 0,
+      depParents: 0
+    });
+  };
+
+  handleChange = event => {
+    this.setState(
+      { [event.target.name]: event.target.value },
+      () => console.log(this.state)
+    );
+  };
+
   render() {
     return (
       <div className="wrapper">
@@ -30,7 +54,7 @@ class Inputs extends Component {
                 <div className="col-md-6 text-center">
                   <p>Single/Married</p>
                   <div className="custom-control custom-switch">
-                    <input type="checkbox" className="custom-control-input" id="maritalStatus" />
+                    <input type="checkbox" className="custom-control-input" id="maritalStatus" value={this.state.maritalStatus} name="maritalStatus" onChange={this.handleChange} />
                     <label className="custom-control-label" for="maritalStatus"></label>
                   </div>
                 </div>
@@ -47,16 +71,16 @@ class Inputs extends Component {
                 <div className="col-md-12 text-center">
                   <p>Dependent Parents</p>
                   <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                    <label className="form-check-label" for="inlineRadio1">None</label>
+                    <input className="form-check-input" type="radio" name="depParents" id="inlineRadio1" value="0" onChange={this.handleChange} />
+                    <label className="form-check-label" htmlFor="inlineRadio1">None</label>
                   </div>
                   <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                    <label className="form-check-label" for="inlineRadio2">One</label>
+                    <input className="form-check-input" type="radio" name="depParents" id="inlineRadio2" value="1" onChange={this.handleChange} />
+                    <label className="form-check-label" htmlFor="inlineRadio2">One</label>
                   </div>
                   <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
-                    <label className="form-check-label" for="inlineRadio3">Two</label>
+                    <input className="form-check-input" type="radio" name="depParents" id="inlineRadio3" value="2" onChange={this.handleChange} />
+                    <label className="form-check-label" htmlFor="inlineRadio3">Two</label>
                   </div>
                 </div>
               </div>

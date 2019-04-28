@@ -34,7 +34,8 @@ class Inputs extends Component {
     this.setState(
       { [event.target.name]: event.target.value },
       () => {console.log(this.state);
-            rate.lookUp()}
+           this.updateRate()
+          }
     );
   };
 
@@ -44,16 +45,24 @@ class Inputs extends Component {
     if (currentMx === "single") {
       this.setState(
         { maritalStatus: "married" },
-        () => console.log(this.state)
+        () => {console.log(this.state);
+          this.updateRate()
+         }
       )
     } else if (currentMx === "married") {
       this.setState(
         { maritalStatus: "single" },
-        () => console.log(this.state)
+        () => {console.log(this.state);
+          this.updateRate()
+         }
       )
     } else console.log("something went wrong");
   }
-
+  updateRate = () => {
+    this.setState(
+      {monthlyRate: rate.lookUp(this.state.effectiveDate, this.state.compEval)}
+      )
+  }
 
   // this function handles the spouse aid and attendance toggle
   handleSpAAButton = () => {

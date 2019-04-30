@@ -22,9 +22,9 @@ class Inputs extends Component {
       effectiveDate: "",
       maritalStatus: "single",
       spAidandAttendance: "no",
-      depParents: 0,
-      depChildren18: 0,
-      depChildrenSchool: 0,
+      depParents: "0",
+      depChildren18: "0",
+      depChildrenSchool: "0",
       compEval: 0,
       monthlyRate: 0
     });
@@ -60,7 +60,7 @@ class Inputs extends Component {
   }
   updateRate = () => {
     this.setState(
-      {monthlyRate: rate.lookUp(this.state.effectiveDate, this.state.compEval)}
+      {monthlyRate: rate.lookUp(this.state.effectiveDate, this.state.compEval, this.state.maritalStatus, this.state.depParents, this.state.depChildren18, this.state.depChildrenSchool)}
       )
   }
 

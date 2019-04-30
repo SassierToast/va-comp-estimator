@@ -5,18 +5,18 @@ import rates_2017_12_01 from '../data/20171201_rates';
 import rates_2018_12_01 from '../data/20181201_rates';
 
 const rate = {
-  rateTable: function(effectiveDate) {
+  rateTable: function (effectiveDate) {
     let rateTable = 0;
-    if (effectiveDate==="20141201") {
+    if (effectiveDate === "20141201") {
       rateTable = rates_2014_12_01;
       // return rateTable["10%"];
-    } else if (effectiveDate==="20161201") {
+    } else if (effectiveDate === "20161201") {
       rateTable = rates_2016_12_01;
       // return rateTable["10%"];
-    } else if (effectiveDate==="20171201") {
+    } else if (effectiveDate === "20171201") {
       rateTable = rates_2017_12_01;
       // return rateTable["10%"];
-    } else if (effectiveDate==="20181201") {
+    } else if (effectiveDate === "20181201") {
       rateTable = rates_2018_12_01
       // return rateTable["10%"];
     };
@@ -24,34 +24,77 @@ const rate = {
     return rateTable;
   },
 
-  lookUp: function(effectiveDate, compEval) {
+  lookUp: function (effectiveDate, compEval, married, depParents, depChildren, schoolChildren) {
     let parseCompEval = compEval + "%";
     let table = rate.rateTable(effectiveDate);
+    let totalChildren = parseInt(depChildren) + parseInt(schoolChildren);
+    let newRate = 0;
     if (parseCompEval === "10%" || parseCompEval === "20%") {
-      return (table[parseCompEval]);
-    } else return 0;
+      newRate = (table[parseCompEval]);
+    } else if (parseCompEval === "30%" || parseCompEval === "40%" || parseCompEval === "50%" || parseCompEval === "60%" || parseCompEval === "70%" || parseCompEval === "80%" || parseCompEval === "90%" || parseCompEval === "100%") {
+      if (married === "married") {
+        // spouse only
+        if (depParents === "0" && depChildren === "0" && schoolChildren === "0") {
+          newRate = (table[parseCompEval].spouse_only)
+        }
+        // spouse and one parent
+        if (depParents === "1" && depChildren === "0" && schoolChildren === "0") {
+          newRate = (table[parseCompEval].spouse_one_parent)
+        }
+        // spouse and two parents
+        if (depParents === "2" && depChildren === "0" && schoolChildren === "0") {
+          newRate = (table[parseCompEval].spouse_two_parent)
+        }
+
+        // spouse and one child
+        if (depParents === "0" && totalChildren === 1) {
+          newRate = (table[parseCompEval].spouse_one_child)
+        }
+
+        // spouse one parent and one child
+        if (depParents === "1" && totalChildren === 1) {
+          newRate = (table[parseCompEval].spouse_one_parent_child)
+        }
+
+        // spouse two parents and one child
+        if (depParents === "2" && totalChildren === 1) {
+          newRate = (table[parseCompEval].spouse_two_parents_child)
+        }
+
+
+      } else if (married === "single") {
+        // no other Veteran dependents
+        if (depParents === "0" && depChildren === "0" && schoolChildren === "0") {
+          newRate = (table[parseCompEval].single)
+        }
+        // unmarried vet and one parent
+        if (depParents === "1" && depChildren === "0" && schoolChildren === "0") {
+          newRate = (table[parseCompEval].one_parent)
+        }
+        // unmarried vet and two parents
+        if (depParents === "2" && depChildren === "0" && schoolChildren === "0") {
+          newRate = (table[parseCompEval].two_parents)
+        }
+        // unmarried vet and one child
+        if (depParents === "0" && totalChildren === 1) {
+          newRate = (table[parseCompEval].child_only)
+        }
+        // unmarried vet one parent and one child
+        if (depParents === "1" && totalChildren === 1) {
+          newRate = (table[parseCompEval].one_parent_child)
+        }
+        // spouse two parents and one child
+        if (depParents === "2" && totalChildren === 1) {
+          newRate = (table[parseCompEval].two_parents_child)
+        }
+      }
+
+      else newRate = 0;
+    }
+
+    // passing out whatever comes back for new rate.
+    return newRate;
   }
-
-
-  // lookUp: function(effectiveDate, compEval) {
-  //   // console.log(rates_2014_12_01["30%"].single);
-  //   if (effectiveDate==="20141201") {
-  //     let rateTable = rates_2014_12_01;
-  //     // return rateTable["10%"];
-  //   } else if (effectiveDate==="20161201") {
-  //     let rateTable = rates_2016_12_01;
-  //     // return rateTable["10%"];
-  //   } else if (effectiveDate==="20171201") {
-  //     let rateTable = rates_2017_12_01;
-  //     // return rateTable["10%"];
-  //   } else if (effectiveDate==="20181201") {
-  //     let rateTable = rates_2018_12_01;
-  //     // return rateTable["10%"];
-  //   } else return 0;
-  // }
-
-
-
 }
 
 export default rate;

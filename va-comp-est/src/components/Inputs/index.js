@@ -33,9 +33,10 @@ class Inputs extends Component {
   handleChange = event => {
     this.setState(
       { [event.target.name]: event.target.value },
-      () => {console.log(this.state);
-           this.updateRate()
-          }
+      () => {
+        console.log(this.state);
+        this.updateRate()
+      }
     );
   };
 
@@ -45,23 +46,28 @@ class Inputs extends Component {
     if (currentMx === "single") {
       this.setState(
         { maritalStatus: "married" },
-        () => {console.log(this.state);
+        () => {
+          console.log(this.state);
           this.updateRate()
-         }
+        }
       )
     } else if (currentMx === "married") {
       this.setState(
         { maritalStatus: "single" },
-        () => {console.log(this.state);
+        () => {
+          console.log(this.state);
           this.updateRate()
-         }
+        }
       )
     } else console.log("something went wrong");
   }
   updateRate = () => {
     this.setState(
-      {monthlyRate: rate.lookUp(this.state.effectiveDate, this.state.compEval, this.state.maritalStatus, this.state.depParents, this.state.depChildren18, this.state.depChildrenSchool)}
-      )
+      {
+        monthlyRate: rate.lookUp(this.state.effectiveDate, this.state.compEval, this.state.maritalStatus, this.state.depParents, this.state.depChildren18, this.state.depChildrenSchool,
+          this.state.spAidandAttendance)
+      }
+    )
   }
 
   // this function handles the spouse aid and attendance toggle
@@ -70,12 +76,18 @@ class Inputs extends Component {
     if (currentAA === "no") {
       this.setState(
         { spAidandAttendance: "yes" },
-        () => console.log(this.state)
+        () => {
+          console.log(this.state);
+          this.updateRate()
+        }
       )
     } else if (currentAA === "yes") {
       this.setState(
         { spAidandAttendance: "no" },
-        () => console.log(this.state)
+        () => {
+          console.log(this.state);
+          this.updateRate()
+        }
       )
     } else console.log("something went wrong");
   }
@@ -200,14 +212,14 @@ class Inputs extends Component {
                 <div className="col-md-12">
                   <label for="compRating">Combined Evaluation for Compensation</label>
                   <input type="range" className="custom-range" min="0" max="100" step="10" id="compRating"
-                  name="compEval"
-                  onChange={this.handleChange}></input>
+                    name="compEval"
+                    onChange={this.handleChange}></input>
                 </div>
               </div>
               {/* Display the value of the slider */}
               <div className="row inputs-section">
                 <div className="col-md-12">
-                <p>{this.state.compEval}%</p>
+                  <p>{this.state.compEval}%</p>
                 </div>
               </div>
             </div>

@@ -24,7 +24,7 @@ const rate = {
     return rateTable;
   },
 
-  lookUp: function (effectiveDate, compEval, married, depParents, depChildren, schoolChildren) {
+  lookUp: function (effectiveDate, compEval, married, depParents, depChildren, schoolChildren, spAA) {
     let parseCompEval = compEval + "%";
     let table = rate.rateTable(effectiveDate);
     let totalChildren = parseInt(depChildren) + parseInt(schoolChildren);
@@ -32,36 +32,44 @@ const rate = {
     if (parseCompEval === "10%" || parseCompEval === "20%") {
       newRate = (table[parseCompEval]);
     } else if (parseCompEval === "30%" || parseCompEval === "40%" || parseCompEval === "50%" || parseCompEval === "60%" || parseCompEval === "70%" || parseCompEval === "80%" || parseCompEval === "90%" || parseCompEval === "100%") {
+
+      // MARRIED VETERAN
       if (married === "married") {
+        // spouse aid and attendance toggle
+        if(spAA === "yes") {
+          // adds the appropriate aa allowance to newRate if toggled
+          newRate += (table[parseCompEval].spouse_aa_allowance)
+        }
+
         // spouse only
         if (depParents === "0" && depChildren === "0" && schoolChildren === "0") {
-          newRate = (table[parseCompEval].spouse_only)
+          newRate += (table[parseCompEval].spouse_only)
         }
         // spouse and one parent
         if (depParents === "1" && depChildren === "0" && schoolChildren === "0") {
-          newRate = (table[parseCompEval].spouse_one_parent)
+          newRate += (table[parseCompEval].spouse_one_parent)
         }
         // spouse and two parents
         if (depParents === "2" && depChildren === "0" && schoolChildren === "0") {
-          newRate = (table[parseCompEval].spouse_two_parent)
+          newRate += (table[parseCompEval].spouse_two_parent)
         }
 
         // spouse and one child
         if (depParents === "0" && totalChildren === 1) {
-          newRate = (table[parseCompEval].spouse_one_child)
+          newRate += (table[parseCompEval].spouse_one_child)
         }
 
         // spouse one parent and one child
         if (depParents === "1" && totalChildren === 1) {
-          newRate = (table[parseCompEval].spouse_one_parent_child)
+          newRate += (table[parseCompEval].spouse_one_parent_child)
         }
 
         // spouse two parents and one child
         if (depParents === "2" && totalChildren === 1) {
-          newRate = (table[parseCompEval].spouse_two_parents_child)
+          newRate += (table[parseCompEval].spouse_two_parents_child)
         }
 
-
+        // UNMARRIED VETERAN
       } else if (married === "single") {
         // no other Veteran dependents
         if (depParents === "0" && depChildren === "0" && schoolChildren === "0") {
@@ -99,4 +107,3 @@ const rate = {
 
 export default rate;
 
-// compEval, marital, spAA, depParents, depChildren, schoolChildren

@@ -24,6 +24,7 @@ const rate = {
     return rateTable;
   },
 
+
   lookUp: function (effectiveDate, compEval, married, depParents, depChildren, schoolChildren, spAA) {
     let parseCompEval = compEval + "%";
     let table = rate.rateTable(effectiveDate);
@@ -33,10 +34,14 @@ const rate = {
       newRate = (table[parseCompEval]);
     } else if (parseCompEval === "30%" || parseCompEval === "40%" || parseCompEval === "50%" || parseCompEval === "60%" || parseCompEval === "70%" || parseCompEval === "80%" || parseCompEval === "90%" || parseCompEval === "100%") {
 
+      function addlChild (compEval,depChildren,schoolChildren) {
+
+      }
+
       // MARRIED VETERAN
       if (married === "married") {
         // spouse aid and attendance toggle
-        if(spAA === "yes") {
+        if (spAA === "yes") {
           // adds the appropriate aa allowance to newRate if toggled
           newRate += (table[parseCompEval].spouse_aa_allowance)
         }
@@ -59,6 +64,36 @@ const rate = {
           newRate += (table[parseCompEval].spouse_one_child)
         }
 
+        // spouse and more than one child
+        if (depParents === "0" && totalChildren > 1) {
+          let totalMinor = parseInt(depChildren);
+          let totalSchool = parseInt(schoolChildren);
+          console.log("Total Minor: " + totalMinor);
+          console.log("Total School: " + totalSchool);
+
+
+          // in any case where each category has at least one child we'll want to subtract the included child from total minor
+          if (totalMinor > 0 && totalSchool > 0) {
+            totalMinor -= 1;
+            console.log("New Total Minor: " + totalMinor)
+          }
+          // if there are no children in minor, subtract the included child from totalSchool
+          else if (totalMinor <= 0) {
+            totalSchool -= 1;
+          }
+          // if there are no children in school, subtract the included child from minor
+          else if (totalSchool <= 0) {
+            totalMinor -= 1;
+          }
+          // if some other case, something is broken.
+          else { console.log("something has gone wrong") }
+
+          let additionalChildAmt = (totalMinor * table[parseCompEval].additional_minor_child) + (totalSchool * table[parseCompEval].additional_school_child);
+
+          newRate += additionalChildAmt;
+          newRate += (table[parseCompEval].spouse_one_child)
+        }
+
         // spouse one parent and one child
         if (depParents === "1" && totalChildren === 1) {
           newRate += (table[parseCompEval].spouse_one_parent_child)
@@ -68,6 +103,9 @@ const rate = {
         if (depParents === "2" && totalChildren === 1) {
           newRate += (table[parseCompEval].spouse_two_parents_child)
         }
+
+
+
 
         // UNMARRIED VETERAN
       } else if (married === "single") {

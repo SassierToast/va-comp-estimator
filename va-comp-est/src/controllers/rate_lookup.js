@@ -34,43 +34,10 @@ const rate = {
       newRate = (table[parseCompEval]);
     } else if (parseCompEval === "30%" || parseCompEval === "40%" || parseCompEval === "50%" || parseCompEval === "60%" || parseCompEval === "70%" || parseCompEval === "80%" || parseCompEval === "90%" || parseCompEval === "100%") {
 
-      function addlChild (compEval,depChildren,schoolChildren) {
-
-      }
-
-      // MARRIED VETERAN
-      if (married === "married") {
-        // spouse aid and attendance toggle
-        if (spAA === "yes") {
-          // adds the appropriate aa allowance to newRate if toggled
-          newRate += (table[parseCompEval].spouse_aa_allowance)
-        }
-
-        // spouse only
-        if (depParents === "0" && depChildren === "0" && schoolChildren === "0") {
-          newRate += (table[parseCompEval].spouse_only)
-        }
-        // spouse and one parent
-        if (depParents === "1" && depChildren === "0" && schoolChildren === "0") {
-          newRate += (table[parseCompEval].spouse_one_parent)
-        }
-        // spouse and two parents
-        if (depParents === "2" && depChildren === "0" && schoolChildren === "0") {
-          newRate += (table[parseCompEval].spouse_two_parent)
-        }
-
-        // spouse and one child
-        if (depParents === "0" && totalChildren === 1) {
-          newRate += (table[parseCompEval].spouse_one_child)
-        }
-
-        // spouse and more than one child
-        if (depParents === "0" && totalChildren > 1) {
+      // the function that calculates the allowance for additional children after one.
+      function addlChild (parseCompEval, depChildren,schoolChildren) {
           let totalMinor = parseInt(depChildren);
           let totalSchool = parseInt(schoolChildren);
-          console.log("Total Minor: " + totalMinor);
-          console.log("Total School: " + totalSchool);
-
 
           // in any case where each category has at least one child we'll want to subtract the included child from total minor
           if (totalMinor > 0 && totalSchool > 0) {
@@ -91,47 +58,112 @@ const rate = {
           let additionalChildAmt = (totalMinor * table[parseCompEval].additional_minor_child) + (totalSchool * table[parseCompEval].additional_school_child);
 
           newRate += additionalChildAmt;
-          newRate += (table[parseCompEval].spouse_one_child)
+      }
+
+      // MARRIED VETERAN
+      if (married === "married") {
+        // spouse aid and attendance toggle
+        if (spAA === "yes") {
+          // adds the appropriate aa allowance to newRate if toggled
+          newRate += (table[parseCompEval].spouse_aa_allowance);
         }
 
-        // spouse one parent and one child
+        // spouse only
+        if (depParents === "0" && depChildren === "0" && schoolChildren === "0") {
+          newRate += (table[parseCompEval].spouse_only);
+        }
+        // spouse and one parent
+        if (depParents === "1" && depChildren === "0" && schoolChildren === "0") {
+          newRate += (table[parseCompEval].spouse_one_parent);
+        }
+        // spouse and two parents
+        if (depParents === "2" && depChildren === "0" && schoolChildren === "0") {
+          newRate += (table[parseCompEval].spouse_two_parent);
+        }
+
+        // spouse and one child
+        if (depParents === "0" && totalChildren === 1) {
+          newRate += (table[parseCompEval].spouse_one_child);
+        }
+
+        // spouse and more than one child
+        if (depParents === "0" && totalChildren > 1) {
+          addlChild(parseCompEval, depChildren, schoolChildren);
+          newRate += (table[parseCompEval].spouse_one_child);
+        }
+
+        // spouse, one parent, and one child
         if (depParents === "1" && totalChildren === 1) {
-          newRate += (table[parseCompEval].spouse_one_parent_child)
+          newRate += (table[parseCompEval].spouse_one_parent_child);
+        }
+
+        // spouse, one parent, more than one child
+        if (depParents === "1" && totalChildren > 1) {
+          addlChild(parseCompEval, depChildren, schoolChildren);
+          newRate += (table[parseCompEval].spouse_one_parent_child);
         }
 
         // spouse two parents and one child
         if (depParents === "2" && totalChildren === 1) {
-          newRate += (table[parseCompEval].spouse_two_parents_child)
+          newRate += (table[parseCompEval].spouse_two_parents_child);
         }
 
-
+        // spouse, two parents, and more than one child
+        if (depParents === "2" && totalChildren > 1) {
+          addlChild(parseCompEval, depChildren, schoolChildren);
+          newRate += (table[parseCompEval].spouse_two_parents_child);
+        }
 
 
         // UNMARRIED VETERAN
       } else if (married === "single") {
+
         // no other Veteran dependents
         if (depParents === "0" && depChildren === "0" && schoolChildren === "0") {
-          newRate = (table[parseCompEval].single)
+          newRate = (table[parseCompEval].single);
         }
+
         // unmarried vet and one parent
         if (depParents === "1" && depChildren === "0" && schoolChildren === "0") {
-          newRate = (table[parseCompEval].one_parent)
+          newRate = (table[parseCompEval].one_parent);
         }
+
         // unmarried vet and two parents
         if (depParents === "2" && depChildren === "0" && schoolChildren === "0") {
-          newRate = (table[parseCompEval].two_parents)
+          newRate = (table[parseCompEval].two_parents);
         }
+
         // unmarried vet and one child
         if (depParents === "0" && totalChildren === 1) {
-          newRate = (table[parseCompEval].child_only)
+          newRate = (table[parseCompEval].child_only);
         }
+
+        // unmarried vet and more than one child
+        if (depParents === "0" && totalChildren > 1) {
+          addlChild(parseCompEval, depChildren, schoolChildren);
+          newRate += (table[parseCompEval].child_only);
+        }
+
         // unmarried vet one parent and one child
         if (depParents === "1" && totalChildren === 1) {
-          newRate = (table[parseCompEval].one_parent_child)
+          newRate = (table[parseCompEval].one_parent_child);
         }
+
+        // unmarried vet one parent and more than one child
+        if (depParents === "1" && totalChildren > 1) {
+          addlChild(parseCompEval, depChildren, schoolChildren);
+          newRate += (table[parseCompEval].one_parent_child);
+        }
+        
         // spouse two parents and one child
         if (depParents === "2" && totalChildren === 1) {
-          newRate = (table[parseCompEval].two_parents_child)
+          newRate += (table[parseCompEval].two_parents_child);
+        }
+
+        // spouse two parents and more than one child
+        if (depParents === "2" && totalChildren === 1) {
+          addlChild(parseCompEval, depChildren, schoolChildren);
+          newRate += (table[parseCompEval].two_parents_child);
         }
       }
 
@@ -139,7 +171,7 @@ const rate = {
     }
 
     // passing out whatever comes back for new rate.
-    return newRate;
+    return newRate.toFixed(2);
   }
 }
 

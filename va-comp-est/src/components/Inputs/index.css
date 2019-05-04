@@ -1,8 +1,18 @@
 .input-box {
   border: solid 2px black;
+  border-radius: 5%;
   padding-bottom: 2rem;
 }
 
 .inputs-section {
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.inner-box {
+  border: solid 1px black;
+}
+
+.spacer {
+  color: white;
 }

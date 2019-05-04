@@ -6,7 +6,7 @@ import rates_2018_12_01 from '../data/20181201_rates';
 
 const rate = {
   rateTable: function (effectiveDate) {
-    let rateTable = 0;
+    let rateTable = "20181201";
     if (effectiveDate === "20141201") {
       rateTable = rates_2014_12_01;
       // return rateTable["10%"];
@@ -155,13 +155,13 @@ const rate = {
           newRate += (table[parseCompEval].one_parent_child);
         }
         
-        // spouse two parents and one child
+        // unmarried two parents and one child
         if (depParents === "2" && totalChildren === 1) {
           newRate += (table[parseCompEval].two_parents_child);
         }
 
-        // spouse two parents and more than one child
-        if (depParents === "2" && totalChildren === 1) {
+        // unmarried two parents and more than one child
+        if (depParents === "2" && totalChildren > 1) {
           addlChild(parseCompEval, depChildren, schoolChildren);
           newRate += (table[parseCompEval].two_parents_child);
         }

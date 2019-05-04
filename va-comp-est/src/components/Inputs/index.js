@@ -23,7 +23,7 @@ class Inputs extends Component {
 
   componentDidMount() {
     this.setState({
-      effectiveDate: "",
+      effectiveDate: "20181201",
       maritalStatus: "single",
       spAidandAttendance: "no",
       depParents: "0",
@@ -108,7 +108,7 @@ class Inputs extends Component {
           <div className="col-md-6 offset-md-3  input-box">
             <div className="container">
               {/* Effective Date Selector */}
-              <div className="row">
+              <div className="row inputs-section">
                 <div className="col-md-12 text-center">
                 <p>Effective Date</p>
                   <div className="form-group">
@@ -129,7 +129,7 @@ class Inputs extends Component {
               <div className="row inputs-section">
                 <div className="col-md-6 text-center">
                   <Marital maritalStatus = {this.state.maritalStatus} />
-                  <p>spacer</p>
+                  <p className="spacer">&nbsp;</p>
                   <div className="custom-control custom-switch">
                     <input type="checkbox" className="custom-control-input" id="maritalStatus"
                       name="maritalStatus"
@@ -171,7 +171,7 @@ class Inputs extends Component {
               {/* Scroll selectors for children */}
               <div className="row inputs-section">
                 <div className="col-md-6 text-center">
-                  <p>Children Under 18</p>
+                  <p>Minor Children</p>
                   <form>
                     <div className="col-auto my-1">
                       <label className="mr-sm-2 sr-only" htmlFor="depChildren18">Dependent Children Under 18</label>
@@ -192,7 +192,7 @@ class Inputs extends Component {
                   </form>
                 </div>
                 <div className="col-md-6 text-center">
-                  <p>Children Between 18 and 23 attending school</p>
+                  <p>School Children</p>
                   <form>
                     <div className="col-auto my-1">
                       <label className="mr-sm-2 sr-only" for="depChildrenSchool">Dependent Children Under 18</label>
@@ -216,16 +216,10 @@ class Inputs extends Component {
               {/* Slider for combined evaluation for compensation percentage */}
               <div className="row inputs-section">
                 <div className="col-md-12">
-                  <label for="compRating">Combined Evaluation for Compensation</label>
-                  <input type="range" className="custom-range" min="0" max="100" step="10" id="compRating"
+                  <label for="compRating">Combined Evaluation for Compensation: <b>{this.state.compEval}%</b></label>
+                  <input type="range" className="custom-range" min="0" max="100" step="10" defaultValue="0" id="compRating"
                     name="compEval"
                     onChange={this.handleChange}></input>
-                </div>
-              </div>
-              {/* Display the value of the slider */}
-              <div className="row inputs-section">
-                <div className="col-md-12">
-                  <p>{this.state.compEval}%</p>
                 </div>
               </div>
             </div>

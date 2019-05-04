@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Results from '../Results'
 import './index.css';
+import rate from '../../controllers/rate_lookup';
 
 // need to make this a stateful component so responses get saved.
 class Inputs extends Component {
@@ -12,7 +13,8 @@ class Inputs extends Component {
     depParents: 0,
     depChildren18: 0,
     depChildrenSchool: 0,
-    compEval: 0
+    compEval: 0,
+    monthlyRate: 0
   };
 
   componentDidMount() {
@@ -20,17 +22,21 @@ class Inputs extends Component {
       effectiveDate: "",
       maritalStatus: "single",
       spAidandAttendance: "no",
-      depParents: 0,
-      depChildren18: 0,
-      depChildrenSchool: 0,
-      compEval: 0
+      depParents: "0",
+      depChildren18: "0",
+      depChildrenSchool: "0",
+      compEval: 0,
+      monthlyRate: 0
     });
   };
 
   handleChange = event => {
     this.setState(
       { [event.target.name]: event.target.value },
-      () => console.log(this.state)
+      () => {
+        console.log(this.state);
+        this.updateRate()
+      }
     );
   };
 
@@ -40,16 +46,29 @@ class Inputs extends Component {
     if (currentMx === "single") {
       this.setState(
         { maritalStatus: "married" },
-        () => console.log(this.state)
+        () => {
+          console.log(this.state);
+          this.updateRate()
+        }
       )
     } else if (currentMx === "married") {
       this.setState(
         { maritalStatus: "single" },
-        () => console.log(this.state)
+        () => {
+          console.log(this.state);
+          this.updateRate()
+        }
       )
     } else console.log("something went wrong");
   }
-
+  updateRate = () => {
+    this.setState(
+      {
+        monthlyRate: rate.lookUp(this.state.effectiveDate, this.state.compEval, this.state.maritalStatus, this.state.depParents, this.state.depChildren18, this.state.depChildrenSchool,
+          this.state.spAidandAttendance)
+      }
+    )
+  }
 
   // this function handles the spouse aid and attendance toggle
   handleSpAAButton = () => {
@@ -57,12 +76,18 @@ class Inputs extends Component {
     if (currentAA === "no") {
       this.setState(
         { spAidandAttendance: "yes" },
-        () => console.log(this.state)
+        () => {
+          console.log(this.state);
+          this.updateRate()
+        }
       )
     } else if (currentAA === "yes") {
       this.setState(
         { spAidandAttendance: "no" },
-        () => console.log(this.state)
+        () => {
+          console.log(this.state);
+          this.updateRate()
+        }
       )
     } else console.log("something went wrong");
   }
@@ -187,20 +212,21 @@ class Inputs extends Component {
                 <div className="col-md-12">
                   <label for="compRating">Combined Evaluation for Compensation</label>
                   <input type="range" className="custom-range" min="0" max="100" step="10" id="compRating"
-                  name="compEval"
-                  onChange={this.handleChange}></input>
+                    name="compEval"
+                    onChange={this.handleChange}></input>
                 </div>
               </div>
               {/* Display the value of the slider */}
               <div className="row inputs-section">
                 <div className="col-md-12">
-                <p>{this.state.compEval}%</p>
+                  <p>{this.state.compEval}%</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <Results></Results>
+        <Results
+          result={this.state.monthlyRate}></Results>
       </div>
     )
   }

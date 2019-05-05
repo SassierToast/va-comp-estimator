@@ -39,7 +39,6 @@ class Inputs extends Component {
     this.setState(
       { [event.target.name]: event.target.value },
       () => {
-        console.log(this.state);
         this.updateRate()
       }
     );
@@ -52,7 +51,6 @@ class Inputs extends Component {
       this.setState(
         { maritalStatus: "married" },
         () => {
-          console.log(this.state);
           this.updateRate()
         }
       )
@@ -60,7 +58,6 @@ class Inputs extends Component {
       this.setState(
         { maritalStatus: "single" },
         () => {
-          console.log(this.state);
           this.updateRate()
         }
       )
@@ -82,7 +79,6 @@ class Inputs extends Component {
       this.setState(
         { spAidandAttendance: "yes" },
         () => {
-          console.log(this.state);
           this.updateRate()
         }
       )
@@ -90,16 +86,12 @@ class Inputs extends Component {
       this.setState(
         { spAidandAttendance: "no" },
         () => {
-          console.log(this.state);
           this.updateRate()
         }
       )
     } else console.log("something went wrong");
   }
 
-  tester = (event) => {
-    console.log(event.target.value)
-  }
 
 
   render() {

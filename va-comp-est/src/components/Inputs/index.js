@@ -4,6 +4,7 @@ import './index.css';
 import Marital from '../Marital';
 import AidAttend from '../AidAttend';
 import Results from '../Results';
+import Footer from '../Footer';
 // controllers
 import rate from '../../controllers/rate_lookup';
 
@@ -30,7 +31,7 @@ class Inputs extends Component {
       depChildren18: "0",
       depChildrenSchool: "0",
       compEval: 0,
-      monthlyRate: 0
+      monthlyRate: "0.00"
     });
   };
 
@@ -226,7 +227,11 @@ class Inputs extends Component {
           </div>
         </div>
         <Results
-          result={this.state.monthlyRate}></Results>
+          result={this.state.monthlyRate}>
+        </Results>
+        <Footer 
+          text = "Disclaimer: The VA Disability Compensation Estimator is not affiliated with the U.S. Department of Veterans Affairs, and is intended for educational purposes only. Any estimate displayed is unofficial and should not be construed as a promise of monetary benefits.">
+        </Footer>
       </div>
     )
   }

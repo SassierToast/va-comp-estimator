@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import Results from '../Results'
 import './index.css';
+// components
+import Marital from '../Marital';
+import AidAttend from '../AidAttend';
+import Results from '../Results';
+import Footer from '../Footer';
+// controllers
 import rate from '../../controllers/rate_lookup';
 
 // need to make this a stateful component so responses get saved.
@@ -19,14 +24,14 @@ class Inputs extends Component {
 
   componentDidMount() {
     this.setState({
-      effectiveDate: "",
+      effectiveDate: "20181201",
       maritalStatus: "single",
       spAidandAttendance: "no",
       depParents: "0",
       depChildren18: "0",
       depChildrenSchool: "0",
       compEval: 0,
-      monthlyRate: 0
+      monthlyRate: "0.00"
     });
   };
 
@@ -104,14 +109,14 @@ class Inputs extends Component {
           <div className="col-md-6 offset-md-3  input-box">
             <div className="container">
               {/* Effective Date Selector */}
-              <div className="row">
-                <div className="col-md-12">
+              <div className="row inputs-section">
+                <div className="col-md-12 text-center">
+                <p>Effective Date</p>
                   <div className="form-group">
                     <select className="form-control" id="effective-date"
                       name="effectiveDate"
                       onChange={this.handleChange}
                     >
-                      <option value="" selected disabled hidden>Effective Date</option>
                       <option value="20181201">12/01/2018</option>
                       <option value="20171201">12/01/2017</option>
                       <option value="20161201">12/01/2016</option>
@@ -124,7 +129,8 @@ class Inputs extends Component {
               {/* Two toggle switches */}
               <div className="row inputs-section">
                 <div className="col-md-6 text-center">
-                  <p>Single/Married</p>
+                  <Marital maritalStatus = {this.state.maritalStatus} />
+                  <p className="spacer">&nbsp;</p>
                   <div className="custom-control custom-switch">
                     <input type="checkbox" className="custom-control-input" id="maritalStatus"
                       name="maritalStatus"
@@ -135,6 +141,7 @@ class Inputs extends Component {
                 </div>
                 <div className="col-md-6 text-center">
                   <p>Spouse Aid and Attendance</p>
+                  <AidAttend aidAttend = {this.state.spAidandAttendance}/>
                   <div className="custom-control custom-switch">
                     <input type="checkbox" className="custom-control-input" id="spAA"
                       name="spAidandAttendance"
@@ -149,7 +156,7 @@ class Inputs extends Component {
                 <div className="col-md-12 text-center">
                   <p>Dependent Parents</p>
                   <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="depParents" id="inlineRadio1" value="0" onChange={this.handleChange} />
+                    <input className="form-check-input" type="radio" name="depParents" id="inlineRadio1" value="0" onChange={this.handleChange} defaultChecked="true"/>
                     <label className="form-check-label" htmlFor="inlineRadio1">None</label>
                   </div>
                   <div className="form-check form-check-inline">
@@ -165,7 +172,7 @@ class Inputs extends Component {
               {/* Scroll selectors for children */}
               <div className="row inputs-section">
                 <div className="col-md-6 text-center">
-                  <p>Children Under 18</p>
+                  <p>Minor Children</p>
                   <form>
                     <div className="col-auto my-1">
                       <label className="mr-sm-2 sr-only" htmlFor="depChildren18">Dependent Children Under 18</label>
@@ -186,7 +193,7 @@ class Inputs extends Component {
                   </form>
                 </div>
                 <div className="col-md-6 text-center">
-                  <p>Children Between 18 and 23 attending school</p>
+                  <p>School Children</p>
                   <form>
                     <div className="col-auto my-1">
                       <label className="mr-sm-2 sr-only" for="depChildrenSchool">Dependent Children Under 18</label>
@@ -210,23 +217,21 @@ class Inputs extends Component {
               {/* Slider for combined evaluation for compensation percentage */}
               <div className="row inputs-section">
                 <div className="col-md-12">
-                  <label for="compRating">Combined Evaluation for Compensation</label>
-                  <input type="range" className="custom-range" min="0" max="100" step="10" id="compRating"
+                  <label for="compRating">Combined Evaluation for Compensation: <b>{this.state.compEval}%</b></label>
+                  <input type="range" className="custom-range" min="0" max="100" step="10" defaultValue="0" id="compRating"
                     name="compEval"
                     onChange={this.handleChange}></input>
-                </div>
-              </div>
-              {/* Display the value of the slider */}
-              <div className="row inputs-section">
-                <div className="col-md-12">
-                  <p>{this.state.compEval}%</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <Results
-          result={this.state.monthlyRate}></Results>
+          result={this.state.monthlyRate}>
+        </Results>
+        <Footer 
+          text = "Disclaimer: The VA Disability Compensation Estimator is not affiliated with the U.S. Department of Veterans Affairs, and is intended for educational purposes only. Any estimate displayed is unofficial and should not be construed as a promise of monetary benefits.">
+        </Footer>
       </div>
     )
   }

@@ -1,21 +1,14 @@
 
 
 .output-box {
-  /* width: 500px; */
-  /* 
-  
-  font-size: 25px;
-  
-  line-height: 30vh;
-  text-align: center;
-   */
-  margin-top: 5rem; 
+  margin-top: 3rem; 
   background: red;
   color: #fff;
-  border-radius: 10%;
-  height: 30rem;
+  height: 10rem;
+  border-radius: 10px;
+  border: solid 1px black;
 }
 
 .output-box h3 {
-  margin-top: 5rem;
+  margin-top: 1rem;
 }

@@ -6,7 +6,7 @@ import rates_2018_12_01 from '../data/20181201_rates';
 
 const rate = {
   rateTable: function (effectiveDate) {
-    let rateTable = 0;
+    let rateTable = "20181201";
     if (effectiveDate === "20141201") {
       rateTable = rates_2014_12_01;
       // return rateTable["10%"];
@@ -35,29 +35,29 @@ const rate = {
     } else if (parseCompEval === "30%" || parseCompEval === "40%" || parseCompEval === "50%" || parseCompEval === "60%" || parseCompEval === "70%" || parseCompEval === "80%" || parseCompEval === "90%" || parseCompEval === "100%") {
 
       // the function that calculates the allowance for additional children after one.
-      function addlChild (parseCompEval, depChildren,schoolChildren) {
-          let totalMinor = parseInt(depChildren);
-          let totalSchool = parseInt(schoolChildren);
+      function addlChild(parseCompEval, depChildren, schoolChildren) {
+        let totalMinor = parseInt(depChildren);
+        let totalSchool = parseInt(schoolChildren);
 
-          // in any case where each category has at least one child we'll want to subtract the included child from total minor
-          if (totalMinor > 0 && totalSchool > 0) {
-            totalMinor -= 1;
-            console.log("New Total Minor: " + totalMinor)
-          }
-          // if there are no children in minor, subtract the included child from totalSchool
-          else if (totalMinor <= 0) {
-            totalSchool -= 1;
-          }
-          // if there are no children in school, subtract the included child from minor
-          else if (totalSchool <= 0) {
-            totalMinor -= 1;
-          }
-          // if some other case, something is broken.
-          else { console.log("something has gone wrong") }
+        // in any case where each category has at least one child we'll want to subtract the included child from total minor
+        if (totalMinor > 0 && totalSchool > 0) {
+          totalMinor -= 1;
+          console.log("New Total Minor: " + totalMinor)
+        }
+        // if there are no children in minor, subtract the included child from totalSchool
+        else if (totalMinor <= 0) {
+          totalSchool -= 1;
+        }
+        // if there are no children in school, subtract the included child from minor
+        else if (totalSchool <= 0) {
+          totalMinor -= 1;
+        }
+        // if some other case, something is broken.
+        else { console.log("something has gone wrong") }
 
-          let additionalChildAmt = (totalMinor * table[parseCompEval].additional_minor_child) + (totalSchool * table[parseCompEval].additional_school_child);
+        let additionalChildAmt = (totalMinor * table[parseCompEval].additional_minor_child) + (totalSchool * table[parseCompEval].additional_school_child);
 
-          newRate += additionalChildAmt;
+        newRate += additionalChildAmt;
       }
 
       // MARRIED VETERAN
@@ -154,14 +154,14 @@ const rate = {
           addlChild(parseCompEval, depChildren, schoolChildren);
           newRate += (table[parseCompEval].one_parent_child);
         }
-        
-        // spouse two parents and one child
+
+        // unmarried two parents and one child
         if (depParents === "2" && totalChildren === 1) {
           newRate += (table[parseCompEval].two_parents_child);
         }
 
-        // spouse two parents and more than one child
-        if (depParents === "2" && totalChildren === 1) {
+        // unmarried two parents and more than one child
+        if (depParents === "2" && totalChildren > 1) {
           addlChild(parseCompEval, depChildren, schoolChildren);
           newRate += (table[parseCompEval].two_parents_child);
         }
@@ -171,7 +171,12 @@ const rate = {
     }
 
     // passing out whatever comes back for new rate.
-    return newRate.toFixed(2);
+    newRate = newRate.toFixed(2);
+    // make sure it has commas at the thousand place
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return numberWithCommas(newRate);
   }
 }
 

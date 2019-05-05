@@ -4,11 +4,11 @@ import React from 'react';
 function AidAttend(props) {
   if (props.aidAttend === "no") {
     return (
-      <p><b>No </b>or Yes</p>
+      <p className="special-mobile"><b>No </b>or Yes</p>
     )
   } else {
     return (
-      <p>No or <b>Yes</b></p>
+      <p className="special-mobile">No or <b>Yes</b></p>
     )
   }
 }

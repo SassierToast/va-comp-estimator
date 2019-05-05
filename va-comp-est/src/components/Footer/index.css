@@ -2,3 +2,7 @@ footer {
   margin-top: 3rem;
   color: white;
 }
+
+footer p {
+  text-decoration: none;
+}

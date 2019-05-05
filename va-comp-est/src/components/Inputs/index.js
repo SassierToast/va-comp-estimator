@@ -156,7 +156,7 @@ class Inputs extends Component {
                 <div className="col-md-12 text-center">
                   <p>Dependent Parents</p>
                   <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="depParents" id="inlineRadio1" value="0" onChange={this.handleChange} />
+                    <input className="form-check-input" type="radio" name="depParents" id="inlineRadio1" value="0" onChange={this.handleChange} defaultChecked="true"/>
                     <label className="form-check-label" htmlFor="inlineRadio1">None</label>
                   </div>
                   <div className="form-check form-check-inline">

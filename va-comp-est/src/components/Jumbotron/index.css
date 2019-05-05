@@ -10,3 +10,7 @@
 button {
   margin-right: 1rem;
 }
+
+.jumbotron p {
+  text-decoration: none !important;
+}

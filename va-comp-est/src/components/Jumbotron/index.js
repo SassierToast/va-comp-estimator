@@ -33,7 +33,7 @@ function Jumbotron() {
           <div className="collapse multi-collapse" id="multiCollapseExample3">
             <div className="card card-body">
               <h5>About</h5>
-              <p>Version 1 of this estimator was built by Eric Hove in Spring 2019.</p>
+              <p>Version 1.0.0 of this VA Disability Compensation Estimator was released by Eric Hove in May 2019.</p>
               <p>The GitHub repository for this project may be found <a href = "https://github.com/eghove/va-comp-estimator" target="_blank" rel="noopener noreferrer">here.</a></p>
               <p>You may learn more about Eric Hove by visiting <a href = "https://eghove.github.io/" target="_blank" rel="noopener noreferrer">here.</a></p>
               <p><b>Disclaimer:</b> The VA Disability Compensation Estimator is not affiliated with the U.S. Department of Veterans Affairs, and is intended for educational purposes only. Any estimate displayed is unofficial and should not be construed as a promise of monetary benefits. To file a claim for disability compensation, please visit <a href="https://www.va.gov/disability/how-to-file-claim/" target="_blank" rel="noopener noreferrer">https://www.va.gov/disability/how-to-file-claim/</a>.</p>
